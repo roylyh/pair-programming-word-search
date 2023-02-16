@@ -21,5 +21,52 @@ const transpose = function(matrix) {
   return array;
 };
 
+const transHorizontalBack = function(matrix) {
+  return matrix.map(ls=>ls.reverse().join(""));
+};
+
+const transVerticalBack = function(matrix) {
+  return transHorizontalBack(transpose(matrix));
+};
+
+const transDiagonal = function(matrix) {
+  const rows = matrix.length;
+  const cols = matrix[0].length;
+  let array = [];
+  for (let col = 0; col < cols; col++) {
+    let j = col;
+    let i = 0;
+    let str = "";
+    while (i >= 0 && j >= 0 && i < rows && j < cols) {
+      str += matrix[i++][j++];
+    }
+    array.push(str);
+  }
+  for (let row = 1; row < rows; row++) {
+    let i = row;
+    let j = 0;
+    let str = "";
+    while (i >= 0 && j >= 0 && i < rows && j < cols) {
+      str += matrix[i++][j++];
+    }
+    array.push(str);
+  }
+  
+  return array;
+};
+
+const result = transDiagonal([
+  ['A', 'W', 'C', 'F', 'Q', 'U', 'A', 'L'],
+  ['S', 'E', 'I', 'N', 'F', 'E', 'L', 'D'],
+  ['Y', 'F', 'C', 'F', 'Q', 'U', 'A', 'L'],
+  ['H', 'M', 'J', 'T', 'E', 'V', 'R', 'G'],
+  ['W', 'H', 'C', 'S', 'Y', 'E', 'R', 'L'],
+  ['B', 'F', 'R', 'E', 'N', 'E', 'Y', 'B'],
+  ['U', 'B', 'T', 'W', 'A', 'P', 'A', 'I'],
+  ['O', 'D', 'C', 'A', 'K', 'U', 'A', 'S'],
+  ['E', 'Z', 'K', 'F', 'Q', 'U', 'A', 'L'],
+]);
+
+console.log(result);
 
 module.exports = wordSearch;
