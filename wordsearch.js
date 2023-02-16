@@ -7,6 +7,18 @@ const wordSearch = (letters, word) => {
   for (let l of verticalJoin) {
     if (l.includes(word)) return true;
   }
+  const transHorizontalBackJoin = transHorizontalBack(letters);
+  for (let l of transHorizontalBackJoin) {
+    if (l.includes(word)) return true;
+  }
+  const transVerticalBackJoin = transVerticalBack(letters);
+  for (let l of transVerticalBackJoin) {
+    if (l.includes(word)) return true;
+  }
+  const transDiagonalJoin = transDiagonal(letters);
+  for (let l of transVerticalBackJoin) {
+    if (l.includes(word)) return true;
+  }
   return false;
 };
 
@@ -51,7 +63,24 @@ const transDiagonal = function(matrix) {
     }
     array.push(str);
   }
-  
+  for (let col = 0; col < cols; col++) {
+    let j = col;
+    let i = 0;
+    let str = "";
+    while (i >= 0 && j >= 0 && i < rows && j < cols) {
+      str += matrix[i++][j--];
+    }
+    array.push(str);
+  }
+  for (let row = 1; row < rows; row++) {
+    let i = row;
+    let j = cols - 1;
+    let str = "";
+    while (i >= 0 && j >= 0 && i < rows && j < cols) {
+      str += matrix[i++][j--];
+    }
+    array.push(str);
+  }
   return array;
 };
 
